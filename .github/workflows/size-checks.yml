@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-report:
+  check-build-size:
     runs-on: ubuntu-latest
 
     steps:
