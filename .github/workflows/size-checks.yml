@@ -19,7 +19,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v2
         with:
-          node-version: "14.17.5"
+          node-version: "12.11.1"
 
       - name: Install node packages and build
         run: |
@@ -29,6 +29,7 @@ jobs:
       - name: Check bundlesize
         run: yarn bundlesize
         env:
+          BUNDLESIZE_GITHUB_TOKEN: ${{ env.BUNDLESIZE_GITHUB_TOKEN }}
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
           CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
