@@ -1,0 +1,36 @@
+name: Test Bundlesize checks
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.17.5"
+
+      - name: Install node packages and build
+        run: |
+          yarn
+          yarn build
+
+      - name: Check bundlesize
+        run: yarn bundlesize
+        env:
+          CI_REPO_OWNER: ${{ github.repository_owner }}
+          CI_REPO_NAME: bundlesize-test
+          CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          CI_COMMIT_SHA: ${{ env.GITHUB_SHA }}
+          CI: ${{ env.CI }}
