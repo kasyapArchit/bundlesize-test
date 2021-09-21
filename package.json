@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "bundlesize": "bundlesize --enable-github-check"
+    "bundlesize": "bundlesize --enable-github-checks"
   },
   "dependencies": {
     "core-js": "^3.6.5",
