@@ -12,7 +12,6 @@ on:
 jobs:
   check-build-size:
     runs-on: ubuntu-latest
-    environment: bundle-report
 
     steps:
       - uses: actions/checkout@v2
@@ -27,11 +26,14 @@ jobs:
           yarn
           yarn build
 
+      - name:
+        run echo ${{ github.event }}
+
       - name: Check bundlesize
         run: yarn bundlesize
         env:
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
           CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          CI_COMMIT_SHA: ${{ env.GITHUB_SHA }}
-          CI: ${{ env.CI }}
+          CI_COMMIT_SHA: ${{ github.sha }}
+          CI: true
