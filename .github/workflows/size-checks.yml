@@ -33,7 +33,7 @@ jobs:
         env:
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
-          CI_COMMIT_MESSAGE: ${{ COMMIT_MESSAGE }}
+          CI_COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
           CI_COMMIT_SHA: ${{ github.sha }}
           CI: true
         run: yarn bundlesize
