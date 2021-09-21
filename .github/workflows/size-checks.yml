@@ -26,14 +26,11 @@ jobs:
           yarn
           yarn build
 
-      - name: Get commit message
-        run: echo ::set-env name=COMMIT_MESSAGE::$(git log --format=%B -n 1 ${{ github.event.after }})
-
       - name: Check bundlesize
         env:
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
-          CI_COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+          CI_COMMIT_MESSAGE: $(git log --format=%B -n 1 ${{ github.event.after }})
           CI_COMMIT_SHA: ${{ github.sha }}
           CI: true
         run: yarn bundlesize
