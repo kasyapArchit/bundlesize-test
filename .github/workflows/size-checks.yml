@@ -12,6 +12,7 @@ on:
 jobs:
   check-build-size:
     runs-on: ubuntu-latest
+    environment: bundle-report
 
     steps:
       - uses: actions/checkout@v2
@@ -25,9 +26,6 @@ jobs:
         run: |
           yarn
           yarn build
-
-      - name: Log github
-        run: echo ${{ github }}
 
       - name: Check bundlesize
         run: yarn bundlesize
