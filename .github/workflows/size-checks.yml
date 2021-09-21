@@ -26,6 +26,9 @@ jobs:
           yarn
           yarn build
 
+      - name: Log github
+        run: echo ${{ github }}
+
       - name: Check bundlesize
         run: yarn bundlesize
         env:
