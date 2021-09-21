@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "path": "./dist/js/app.**.js",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/js/chunk-vendors.**.js",
+      "maxSize": "50 kB"
+    }
+  ]
+}

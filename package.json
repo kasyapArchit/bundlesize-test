@@ -5,9 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "bundlesize": "bundlesize --enable-github-checks"
   },
   "dependencies": {
+    "bundlesize2": "^0.0.30",
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
