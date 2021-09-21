@@ -32,7 +32,6 @@ jobs:
       - name: Check bundlesize
         run: yarn bundlesize
         env:
-          BUNDLESIZE_GITHUB_TOKEN: ${{ env.BUNDLESIZE_GITHUB_TOKEN }}
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
           CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
