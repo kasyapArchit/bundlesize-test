@@ -26,16 +26,14 @@ jobs:
           yarn
           yarn build
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      - name: Get commit message
+        run: echo ::set-env name=COMMIT_MESSAGE::$(git log --format=%B -n 1 ${{ github.event.after }})
 
       - name: Check bundlesize
         env:
           CI_REPO_OWNER: ${{ github.repository_owner }}
           CI_REPO_NAME: bundlesize-test
-          CI_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          CI_COMMIT_MESSAGE: ${{ COMMIT_MESSAGE }}
           CI_COMMIT_SHA: ${{ github.sha }}
           CI: true
         run: yarn bundlesize
