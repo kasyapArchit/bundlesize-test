@@ -26,17 +26,15 @@ jobs:
           yarn
           yarn build
 
-      - name: Get commit message
-        run: |
-          echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
-          echo "$(git log --format=%B -n 1 HEAD)" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+      - name: Dump github context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Check bundlesize
-        env:
-          CI_REPO_OWNER: ${{ github.repository_owner }}
-          CI_REPO_NAME: bundlesize-test
-          CI_COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
-          CI_COMMIT_SHA: ${{ github.sha }}
-          CI: true
-        run: yarn bundlesize
+        run: yarn bundlesize > bundlesize-result.md
+
+      - name: Edit result file
+        run: |
+          sed -e '/^$/d' -e '1d' -e '$d' result.md > bundlesize-report.md
+          cat bundlesize-report.md
