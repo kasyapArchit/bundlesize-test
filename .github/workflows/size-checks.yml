@@ -32,7 +32,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
       - name: Check bundlesize
-        run: yarn bundlesize > bundlesize-result.md
+        run: yarn bundlesize > result.md
 
       - name: Edit result file
         run: |
