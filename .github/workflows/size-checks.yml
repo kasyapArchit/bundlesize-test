@@ -26,18 +26,11 @@ jobs:
           yarn
           yarn build
 
-      - name: Dump github context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: Check bundlesize
         run: yarn bundlesize > result.md
 
       - name: Edit result file
-        run: |
-          sed -e '/^$/d' -e '1d' -e '$d' result.md > bundlesize-report.md
-          cat bundlesize-report.md
+        run: sed -e '1d' -e '$d' result.md > bundlesize-report.md
 
       - name: Store file
         id: bundlesize-report
